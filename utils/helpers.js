@@ -124,7 +124,7 @@ import { white } from './colors'
             max: 10,
             unit: 'rating',
             step: 1,
-            type: 'steppers',
+            type: 'slider',
             getIcon() {
                 return (
                 <View>
