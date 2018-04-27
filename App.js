@@ -1,6 +1,9 @@
 import React from 'react'
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, Image, FlatList } from 'react-native'
 import getReviews from './reviews'
+// Flatlist - Only loads items in view
+// performance gain rather than rendering entire list 
+// rendering specific items that the user can currently see
 
 function Review({ name, text, avatar }) {
   return (
@@ -15,14 +18,16 @@ function Review({ name, text, avatar }) {
 }
 
 export default class App extends React.Component {
+  renderItem = ({ item }) => {
+    return <Review {...item} />
+  }
+  
   render() {
     const reviews = getReviews()
     return (
-      <ScrollView style={styles.container}>
-        {reviews.map(({name, text, avatar}, key) => 
-          <Review key={key} name={name} text={text} avatar={avatar} />
-        )}
-      </ScrollView>
+      <View style={styles.container}>
+        <FlatList data={reviews} renderItem={this.renderItem} />
+      </View>
     );
   }
 }
