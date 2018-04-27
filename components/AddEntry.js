@@ -6,6 +6,7 @@ import UdaciStepper from './UdaciStepper'
 import DateHeader from './DateHeader'
 import { Ionicons } from '@expo/vector-icons'
 import TextButton from './TextButton'
+import { submit, entry} from './api'
 
 function SubmitBtn({ onPress }) {
     return (
@@ -47,22 +48,44 @@ export default class AddEntry extends Component {
         })
     }
 
-    slider = (metric, value) => {
+    slide = (metric, value) => {
         this.setState(() => ({
             [metric]: value,
         }))
     }
 
+    submit = () => {
+        const key = timeToString()
+        const entry = this.state
+
+        //Update Redux
+
+        this.setState(() => ({
+            run: 0,
+            bike: 0,
+            swim: 0,
+            sleep: 0,
+            eat: 0
+        }))
+
+        // Navigate to Home
+
+        submitEntry({ key, entry })
+
+        // Clean local notification
+
+    }
 
     reset =() => {
         const key = timeToString()
 
-        //Update Redux
+        // Update Redux
 
         // Route to Home
 
-        // Update "DB"
+       removeEntry(key)
     }
+
     render() {
         const metaInfo = getMetricMetaInfo()
 
@@ -97,7 +120,7 @@ export default class AddEntry extends Component {
                             {type === 'slider'
                                 ? <UdaciSlider
                                     value={value}
-                                    onChange={(value) => this.slider(key, value)}
+                                    onChange={(value) => this.slide(key, value)}
                                     {...rest}
                                 />
                                 : <UdaciStepper
