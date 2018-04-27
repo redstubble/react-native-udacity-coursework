@@ -1,33 +1,57 @@
 import React from 'react'
-import { View, Text, StyleSheet, Image, FlatList } from 'react-native'
-import getReviews from './reviews'
-// Flatlist - Only loads items in view
-// performance gain rather than rendering entire list 
-// rendering specific items that the user can currently see
+import { 
+  View, 
+  Text, 
+  StyleSheet, 
+  Switch, 
+  TextInput,
+  KeyboardAvoidingView,
+  Image
+ } from 'react-native'
 
-function Review({ name, text, avatar }) {
-  return (
-    <View style={styles.review}>
-      <Image source={{uri: avatar}} style={styles.avatar}/>
-      <View style={{flex: 1, flexWrap: 'wrap'}}>
-        <Text style={{fontSize: 20}}>{name}</Text>
-        <Text>{text}</Text>
-      </View>
-    </View>
-  )
-}
 
 export default class App extends React.Component {
-  renderItem = ({ item }) => {
-    return <Review {...item} />
+  state = {
+    input: 'Test',
+    showInput: false
   }
   
+  handleToggleSwitch = () => {
+    this.setState((state) => ({
+      showInput: !state.showInput
+    }))
+  }
+
+  handleTextChange = (input) => {
+    this.setState(() => ({
+      input
+    }))
+  }
+
   render() {
-    const reviews = getReviews()
+    const { input, showInput } = this.state
+
     return (
-      <View style={styles.container}>
-        <FlatList data={reviews} renderItem={this.renderItem} />
-      </View>
+      <KeyboardAvoidingView behaviour='position' style={styles.container}>
+
+        <Image
+          source={{uri:'https://tylermcginnis.com/tylermcginnis_glasses-300.png'}}
+          style={styles.img}
+          />
+
+        <Switch
+          value={showInput}
+          onValueChange={this.handleToggleSwitch}
+        />
+
+        {showInput === true && (
+        <TextInput
+          value={input}
+          style={styles.input}
+          onChangeText={this.handleTextChange}
+        />)}
+        
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -35,15 +59,23 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 25,
+    backgroundColor: '#ECF0F1'
   },
-  review: {
-    margin:10,
-    flexDirection: 'row',
+  input: {
+    width: 200,
+    height: 44,
+    padding: 0,
+    borderWidth: 1,
+    borderColor: '#757575',
+    margin: 50,
   },
-  avatar: {
-    height:50,
-    width: 50,
-    borderRadius:25
+  img: {
+    width: 100,
+    height: 100,
+    margin: 50
   }
 })
 
