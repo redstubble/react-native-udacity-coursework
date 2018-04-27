@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { View, Text, StyleSheet, Image, ScrollView } from 'react-native'
 import getReviews from './reviews'
 
 function Review({ name, text, avatar }) {
@@ -18,11 +18,11 @@ export default class App extends React.Component {
   render() {
     const reviews = getReviews()
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         {reviews.map(({name, text, avatar}, key) => 
           <Review key={key} name={name} text={text} avatar={avatar} />
         )}
-      </View>
+      </ScrollView>
     );
   }
 }
