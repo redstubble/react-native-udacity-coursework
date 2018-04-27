@@ -142,3 +142,9 @@ import { white } from './colors'
       ? info 
       : info[metric]
   }
+
+  export function getDailyReminderValue () {
+    return {
+      today: "Dont forget to log data today"
+    }
+  }
