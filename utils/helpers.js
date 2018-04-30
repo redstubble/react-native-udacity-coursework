@@ -70,7 +70,7 @@ import { white, red, orange, blue, lightPurp, pink } from './colors'
                   <View style={[styles.iconContainer, {backgroundColor: red}]}>
                       <MaterialIcons
                         name='directions-run'
-                        color={'black'}
+                        color={'white'}
                         size={35}
                     />
                   </View>                          
@@ -88,7 +88,7 @@ import { white, red, orange, blue, lightPurp, pink } from './colors'
                 <View style={[styles.iconContainer, {backgroundColor: orange}]}>
                     <MaterialCommunityIcons
                       name='bike'
-                      color={'black'}
+                      color={'white'}
                       size={35}
                   />
                 </View>                          
@@ -106,7 +106,7 @@ import { white, red, orange, blue, lightPurp, pink } from './colors'
                 <View style={[styles.iconContainer, {backgroundColor: blue}]}>
                     <MaterialCommunityIcons
                       name='swim'
-                      color={'black'}
+                      color={'white'}
                       size={35}
                   />
                 </View>                          
@@ -124,7 +124,7 @@ import { white, red, orange, blue, lightPurp, pink } from './colors'
                 <View style={[styles.iconContainer, {backgroundColor: lightPurp}]}>
                     <FontAwesome
                       name='bed'
-                      color={'black'}
+                      color={'white'}
                       size={35}
                   />
                 </View>                          
@@ -142,7 +142,7 @@ import { white, red, orange, blue, lightPurp, pink } from './colors'
                 <View style={[styles.iconContainer, {backgroundColor: pink}]}>
                     <MaterialCommunityIcons
                       name='food'
-                      color={'black'}
+                      color={'white'}
                       size={35}
                   />
                 </View>                          
