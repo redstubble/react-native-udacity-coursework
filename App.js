@@ -1,6 +1,6 @@
 import React from 'react'
 import AddEntry from './components/AddEntry'
-import { View, Platform } from 'react-native'
+import { View, Platform, StatusBar } from 'react-native'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
@@ -9,8 +9,17 @@ import configureStore from './components/configureStore'
 import { TabNavigator } from 'react-navigation'
 import { purple, white } from './utils/colors'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
+import { Constants } from 'expo'
 
 const store = configureStore()
+
+function UdaciStatusBar({ backgroundColor, ...props }) {
+  return (
+    <View style={{backgroundColor: backgroundColor, height: Constants.statusBarHeight}}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+    </View>
+  )
+}
 
 const Tabs = TabNavigator({
   History: {
@@ -28,24 +37,24 @@ const Tabs = TabNavigator({
     }
   }
 }, {
-  navigationOptions: {
-    header: null
-  },
-  tabBarOptions: {
-    activeTintColor: Platform.OS === 'ios' ? purple : white,
-    style: {
-      height: 56,
-      backgroundColor: Platform.OS === 'ios' ? white : purple,
-      shadowColor: 'rgba(0,0,0,0.24)',
-      shadowOffset: {
-        width: 0,
-        height: 3
-      },
-      shadowRadius: 6,
-      shadowOpacity: 1
+    navigationOptions: {
+      header: null
+    },
+    tabBarOptions: {
+      activeTintColor: Platform.OS === 'ios' ? purple : white,
+      style: {
+        height: 56,
+        backgroundColor: Platform.OS === 'ios' ? white : purple,
+        shadowColor: 'rgba(0,0,0,0.24)',
+        shadowOffset: {
+          width: 0,
+          height: 3
+        },
+        shadowRadius: 6,
+        shadowOpacity: 1
+      }
     }
-  }
-})
+  })
 
 export default class App extends React.Component {
 
@@ -53,7 +62,7 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <View style={{ flex: 1 }}>
-          <View style={{ height: 20 }}/>
+          <UdaciStatusBar backgroundColor={purple} barStyle="light-content"/>
           <Tabs />
         </View>
       </Provider>
