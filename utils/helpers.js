@@ -166,7 +166,7 @@ export function getDailyReminderValue() {
 
 export function clearLocalNotifications() {
   return AsyncStorage.removeItem(NOTIFICATION_KEY)
-  .then(Notifications.cancelAllScheduledNotificationsAsync())
+  .then(Notifications.cancelAllScheduledNotificationsAsync)
 }
 
 function createLocalNotification() {
@@ -179,7 +179,7 @@ function createLocalNotification() {
     android: {
       sound: true,
       priority: 'high',
-      sticky: fasle,
+      sticky: false,
       vibrate: true,
     }
   }
